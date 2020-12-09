@@ -1,19 +1,29 @@
+# coding: utf-8
 import rhinoscriptsyntax as rs
 
 #クラス定義
 class CirclePack():
-    def __init__(self,_id,_circle_obj): #イニシャライズ関数の引数を何にすれば良いのか？
-        self.id=_id
+    def __init__(self, _name, _circle_obj): #イニシャライズ関数の引数を何にすれば良いのか？
+        self.name=_name
         self.circle_obj=_circle_obj
-    def getDistance(self)  #関数の引数も何にすれば良いのか？
-    def getStatus(self)
-    def MoveObj(self)
+    
+    def getDistance(self, y_c_i):
+        m_p = rs.CircleCenterPoint(self.circle_obj)
+        y_p = rs.CircleCenterPoint(y_c_i.circle_obj)
+        dis = rs.Distance(m_p,y_p)
+        return dis
+        
+#    def getStatus(self)
+#    def MoveObj(self)
 
 
 id_1=rs.AddCircle((0,0,0),40)
+id_2=rs.AddCircle((100,100,0),50)
 
-circle_1=CirclePack(self,id_1,_circle_obj) 
-#インスタンス化(実体化)
-#イニシャライズの関数の引数の数と同じ？
-#ここでプログラム実行される。
-#self(自分の？)
+#circle_1=CirclePack(self,id_1,_circle_obj)
+
+circle_1 = CirclePack("a", id_1)
+circle_2 = CirclePack("b", id_2)
+
+dis_1_2 = circle_1.getDistance(circle_2)
+print(dis_1_2)
