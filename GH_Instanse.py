@@ -15,6 +15,7 @@ class CirclePack():
         return dis
         
     def getStatus(self, y_c_i):
+        #TODO:getDistanse関数を使う
         if rs.IsCircle(self.circle_obj) and rs.IsCircle(y_c_i.circle_obj):
             radius_1 = rs.CircleRadius(self.circle_obj)
             radius_2 = rs.CircleRadius(y_c_i.circle_obj)
@@ -49,23 +50,19 @@ class CirclePack():
         move_vec_m_y=rs.VectorScale(unit_vec_m_y,move_dis)
         move_vec_y_m=rs.VectorScale(unit_vec_y_m,move_dis)
         
-        if(dis_1_2 == radius_1 + radius_2):
-            status = 0
-        if(radius_1 + radius_2 < dis_1_2):
-            status = 1
-        if(dis_1_2 < radius_1 + radius_2):
-            status = 2
+#        status = self.getStatus(y_c_i)
+#        
+#        if(status == 1):
+#            rs.MoveObject(self.circle_obj,move_vec_m_y)
+#            rs.MoveObject(y_c_i.circle_obj,move_vec_y_m)
+#    
+#        if(status == 2):
+#            rs.MoveObject(self.circle_obj,move_vec_y_m)
+#            rs.MoveObject(y_c_i.circle_obj,move_vec_m_y)
         
-        
-        if(status == 1):
-            move_obj_a=rs.MoveObject(self.circle_obj,move_vec_m_y)
-            move_obj_b=rs.MoveObject(y_c_i.circle_obj,move_vec_y_m)
-    
-        if(status == 2):
-            move_obj_a=rs.MoveObject(self.circle_obj,move_vec_y_m)
-            move_obj_b=rs.MoveObject(y_c_i.circle_obj,move_vec_m_y)
-            
-        return move_obj_a,move_obj_b
+        rs.MoveObject(self.circle_obj,move_vec_m_y)
+        rs.MoveObject(y_c_i.circle_obj,move_vec_y_m)
+
 
 #id_1=rs.AddCircle((0,0,0),40)
 #id_2=rs.AddCircle((100,100,0),50)
@@ -88,7 +85,7 @@ for i in range(circle_num):
 circle_packs = []
 for i in range(circle_num):
     id = ids[i]
-    circle_pack = CirclePack(str(i), id)
+    circle_pack = CirclePack(str(i), rs.coercecurve(id))
     circle_packs.append(circle_pack)
 
 #--- 出力
@@ -100,17 +97,17 @@ for i in range(circle_num):
 
 #↓メソッドの試しにこっちのコンポーネントにも
 
-for i in range(circle_num):
-    my_circle = circle_packs[i]
-    
-    for j in range(circle_num):
-        you_circle = circle_packs[j]
-        
-        
-        if my_circle == you_circle:
-            continue
-        move = my_circle.Moveobj(you_circle)
-        print(move)
+#for i in range(circle_num):
+#    my_circle = circle_packs[i]
+#    
+#    for j in range(circle_num):
+#        you_circle = circle_packs[j]
+#        
+#        
+#        if my_circle == you_circle:
+#            continue
+#        move = my_circle.Moveobj(you_circle)
+##        print(move)
 
 
 
