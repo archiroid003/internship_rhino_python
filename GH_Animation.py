@@ -17,7 +17,14 @@ for i in range(circle_num):
         
         if my_circle == you_circle:
             continue
-        move = my_circle.Moveobj(you_circle)
         
-        
-out_circles = move_objs
+        my_circle.Moveobj(you_circle)
+
+#--- 出力
+ids = []
+for i in range(circle_num):
+    circle_pack = circle_packs[i]
+    id = circle_pack.circle_obj
+    ids.append(id)
+
+out_circles = ids
